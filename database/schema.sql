@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS reviews;
+DROP DATABASE IF EXISTS AirBusyBeavers_reviews;
 
-CREATE DATABASE reviews;
+CREATE DATABASE AirBusyBeavers_reviews;
 
-USE reviews;
+USE AirBusyBeavers_reviews;
 
 CREATE TABLE reviews (
     id INT NOT NULL AUTO_INCREMENT,
