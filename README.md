@@ -19,30 +19,82 @@ MySQL than NoSQL databases. In term of scalability, it is possible, but more of 
 
 **MongoDB:** The other database that I will test against is MongoDB which is known to meet the need as data grow unbounded through horizontal scaling. In case of high transaction rate with over thousands of requests per seconds, I would need multiple databases servers to spread out the loads more evenly, as compared to monolithic database like MySQL. The downside of MongoDB is that the default setting does not have security setting set up and outsiders can retrieve and write data. The security setting requires expertise to set it up. Smaller companies can rely on professional paid support or outsource to guide through the setup decision overtime which MongoDB offers in the marketplace. Compared to other NoSQL databases, mongoDB has better external supports.
 
-![Schema Image](https://user-images.githubusercontent.com/32609294/74411457-16e7c800-4df0-11ea-8a92-5821ccd33705.PNG)
+![Schema Image](https://user-images.githubusercontent.com/32609294/74513205-eae74800-4ebe-11ea-911b-277bc569883b.PNG)
 
 # CRUD API
 -   Create: add new data to databases
-```
+
     -   Type: POST
-    -   Url: '/reviews'
-    -   Data: user_acct, user_photo_url, created_at, review_content
-```
--   Read: Retrieve and show data from the databases
-```
+    -   Url: '/properties/:property_id/reviews/'
+    -   Req.body: 
+    ```
+    {
+        user_id,
+        user_acct,
+        user_photo_url,
+        created_at,
+        review_content,
+        review_id,
+        communication_rating,
+        accuracy_rating,
+        cleanliness_rating,
+        checkin_rating,
+        value_rating
+    }
+    ```
+    -   Returns: None
+
+-   Read: Retrieve property data
+
     -   Type: GET
-    -   Url: '/reviews'
-    -   Data: user_id, user_acct, user_photo_url, created_at, review_content
-```
--   Update: update data in the database
+    -   Url: '/properties/:property_id/reviews'
+    -   Req.body: 
+    ```
+    {
+        review_id, 
+        user_id, 
+        review_content,
+        created_at, 
+        communication_rating,
+        accuracy_rating,
+        cleanliness_rating,
+        checkin_rating,
+        value_rating
+        user_acct,
+        user_photo_url,
+        joined_date
+    }
+    ```
+    -   Returns: an array of the response objects
+
+-   Update: update stored review data based on property ID and review ID
 ```
     -   Type: PUT or PATCH
-    -   Url: '/reviews'
-    -   Data: user_acct, user_photo_url, created_at, review_content
+    -   Url: '/properties/:property_id/reviews/:review_id/'
+    -   Req.body: 
+    ```
+    {
+        review_id, 
+        user_id, 
+        review_content,
+        created_at, 
+        communication_rating,
+        accuracy_rating,
+        cleanliness_rating,
+        checkin_rating,
+        value_rating
+        user_acct,
+        user_photo_url
+    }
+    ```
+    -   Returns: None
 ```
--   Delete: remove data from database
+-   Delete: remove data from database based on review ID
 ```
     -   Type: DELETE
-    -   Url: '/reviews'
-    -   Data: user_acct, user_photo_url, created_at, review_content
+    -   Url: '/reviews/:review_id'
+    -   Req.body: not needed
+    -   Returns: None
 ```
+
+Reference: https://docs.google.com/document/d/1rYWObwtvSLuT-1nZBC1PMPT5ZUMBxjGhceMR0y_EGo8/edit#heading=h.78y539l5vyun

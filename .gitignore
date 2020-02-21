@@ -2,3 +2,10 @@ node_modules
 bundle.js
 .eslintrc.json
 image
+database/reviewTableSQLData.csv
+database/propertyTableSQLData.csv
+database/userTableSQLData.csv
+database/sampleReviewTableSQLData.csv
+database/samplePropertyTableSQLData.csv
+database/sampleUserTableSQLData.csv
+database/propertyTableMongoData.csv
