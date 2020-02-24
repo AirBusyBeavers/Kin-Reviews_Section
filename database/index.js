@@ -7,15 +7,15 @@ connection.connect((err) => {
   if (err) {
     console.log('mysql is not connected: ', err);
   } else {
-    console.log('mysql is connected');
+    console.log('connected as id ' + connection.threadId);
   }
 });
 
 // retrive all sample data in reviews table for API calls.
 const getData = (callback) => {
-  const query = 'SELECT * from reviews WHERE property_id = 0;';
+  const query = 'SELECT * from review';
   connection.query(query, (error, results) => {
-    if (error) {
+  if (error) {
       // console.log('error retrive data from reviews table: ', error);
       callback(error);
     } else {
@@ -27,9 +27,10 @@ const getData = (callback) => {
 
 
 // MySQL get route - get all data needed for the component from databases whose properties_id
-const getAPropertyData = (properties, callback) => {
-  var mysql = 'SELECT r.review_id, r.user_id, r.review_content, r.created_at, u.user_acct, u.user_photo_url FROM review r INNER JOIN user u ON r.user_id=u.user_id WHERE r.property_id=?';
-  connection.query(mysql, [review.property_id], (error, results) => {
+const getAPropertyData = (property_id, callback) => {
+  var mysql = 'SELECT r.review_id, r.property_id, r.user_id, r.review_content, r.created_at, u.user_acct, u.user_photo_url FROM review r INNER JOIN user u ON r.user_id=u.user_id WHERE r.property_id=?';
+  // connection.query(mysql, [review.property_id], (error, results) => {
+  connection.query(mysql, property_id, (error, results) => {
     if (error) {
       callback(error);
     } else {
@@ -38,9 +39,14 @@ const getAPropertyData = (properties, callback) => {
   });
 };
 
-const updateReviewData = (properties, callback) => {
-  var mysql = 'UPDATE u.user_acct, u.user_photo_url, r.created_at, r.review_content FROM review r INNER JOIN user user u';
-  connection.query(mysql, (error, results) => {
+const updateReviewData = (request, callback) => {
+  var property_id = request.params.property_id;
+  var review_id = request.params.review_id;
+  const { user_acct, user_photo_url, created_at, review_content } = request.body;
+  console.log(user_acct);
+  var mysql = 'UPDATE review r INNER JOIN user u ON r.user_id=u.user_id SET u.user_acct=?, u.user_photo_url=?, r.created_at=?, r.review_content=? WHERE r.property_id=? AND r.review_id=?';
+  // var mysql = 'UPDATE u.user_acct, u.user_photo_url, r.created_at, r.review_content FROM review r INNER JOIN user u';
+  connection.query(mysql, [user_acct, user_photo_url, created_at, review_content, Number(property_id), Number(review_id)], (error, results) => {
     if (error) {
       callback(error);
     } else {
@@ -49,9 +55,11 @@ const updateReviewData = (properties, callback) => {
   });
 };
 
-const addReviewData = (review, callback) => {
-  var mysql = 'INSERT INTO review (user_id, property_id, review_content, created_at) VALUES (?, ?, ?, ?)';
-  connection.query(mysql, [review.user_id, review.property_id, review.review_content, review.created_at], (error, results) => {
+const addReviewData = (request, callback) => {
+  var property_id = request.params.property_id;
+  const { user_id, review_content, created_at, communication_rating, accuracy_rating, cleanliness_rating, checkin_rating, value_rating } = request.body;
+  var mysql = 'INSERT INTO review (user_id, property_id, review_content, created_at, communication_rating, accuracy_rating, cleanliness_rating, checkin_rating, value_rating) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+  connection.query(mysql, [user_id, Number(property_id), review_content, created_at, communication_rating, accuracy_rating, cleanliness_rating, checkin_rating, value_rating], (error, results) => {
     if (error) {
       callback(error);
     } else {
@@ -60,9 +68,10 @@ const addReviewData = (review, callback) => {
   });
 };
 
-const deleteReviewData = (review, callback) => {
+const deleteReviewData = (request, callback) => {
   var mysql = 'DELETE FROM review WHERE review_id=?';
-  connection.query(mysql, [review.review_id], (error, results) => {
+  var review_id = request.params.review_id;
+  connection.query(mysql, [review_id], (error, results) => {
     if (error) {
       callback(error);
     } else {

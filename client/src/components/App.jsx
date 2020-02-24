@@ -27,7 +27,7 @@ class App extends React.Component {
   }
 
   getReviews() {
-    axios.get('/api/0')
+    axios.get('/api/1')
       .then((response) => {
         console.log(response)
         // shows first 7 comments by default
