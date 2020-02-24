@@ -1,9 +1,8 @@
 const mysqlConfig = {
   host: 'localhost',
   user: 'root',
-  passowrd: '',
-  // eslint-disable-next-line comma-dangle
-  database: 'reviews'
+  password: '123',
+  database: 'AirBusyBeavers_reviews'
 };
 
 module.exports = mysqlConfig;
