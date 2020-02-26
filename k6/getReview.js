@@ -8,6 +8,6 @@ export let options = {
 };
 
 export default function() {
-    http.get('http://localhost:3004/properties/323323');
+    http.get('http://localhost:3003/properties/323323');
     sleep(1);
 }

@@ -7,7 +7,7 @@ export let options = {
 
 export default function() {
     var property_id = Math.floor(Math.random() * Math.floor(15000000));
-    var url = `http://localhost:3004/properties/${property_id}/reviews/`;
+    var url = `http://localhost:3003/properties/${property_id}/reviews/`;
     var payload = JSON.stringify({
     user_id: Math.floor(Math.random() * Math.floor(50000000)),
     review_content: 'More stuff',
