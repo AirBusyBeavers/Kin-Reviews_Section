@@ -1,4 +1,4 @@
-// Create sample test data for MySQL - User: 50M, property: 10M, review: 30M
+// Create sample test data for MySQL - User: 50M, property: 10M, review: 15M
 
 const faker = require('faker');
 const fs = require('fs');

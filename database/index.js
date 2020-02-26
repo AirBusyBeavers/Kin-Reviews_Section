@@ -28,7 +28,7 @@ const getData = (callback) => {
 
 // MySQL get route - get all data needed for the component from databases whose properties_id
 const getAPropertyData = (property_id, callback) => {
-  var mysql = 'SELECT r.review_id, r.property_id, r.user_id, r.review_content, r.created_at, u.user_acct, u.user_photo_url FROM review r INNER JOIN user u ON r.user_id=u.user_id WHERE r.property_id=?';
+  var mysql = 'SELECT r.review_id, r.property_id, r.user_id, r.review_content, r.created_at, u.user_acct FROM review r INNER JOIN user u ON r.user_id=u.user_id WHERE r.property_id=?';
   // connection.query(mysql, [review.property_id], (error, results) => {
   connection.query(mysql, property_id, (error, results) => {
     if (error) {
@@ -42,11 +42,11 @@ const getAPropertyData = (property_id, callback) => {
 const updateReviewData = (request, callback) => {
   var property_id = request.params.property_id;
   var review_id = request.params.review_id;
-  const { user_acct, user_photo_url, created_at, review_content } = request.body;
+  const { user_acct, created_at, review_content } = request.body;
   console.log(user_acct);
-  var mysql = 'UPDATE review r INNER JOIN user u ON r.user_id=u.user_id SET u.user_acct=?, u.user_photo_url=?, r.created_at=?, r.review_content=? WHERE r.property_id=? AND r.review_id=?';
+  var mysql = 'UPDATE review r INNER JOIN user u ON r.user_id=u.user_id SET u.user_acct=?, r.created_at=?, r.review_content=? WHERE r.property_id=? AND r.review_id=?';
   // var mysql = 'UPDATE u.user_acct, u.user_photo_url, r.created_at, r.review_content FROM review r INNER JOIN user u';
-  connection.query(mysql, [user_acct, user_photo_url, created_at, review_content, Number(property_id), Number(review_id)], (error, results) => {
+  connection.query(mysql, [user_acct, created_at, review_content, Number(property_id), Number(review_id)], (error, results) => {
     if (error) {
       callback(error);
     } else {

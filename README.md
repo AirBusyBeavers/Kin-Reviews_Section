@@ -19,7 +19,7 @@ MySQL than NoSQL databases. In term of scalability, it is possible, but more of 
 
 **MongoDB:** The other database that I will test against is MongoDB which is known to meet the need as data grow unbounded through horizontal scaling. In case of high transaction rate with over thousands of requests per seconds, I would need multiple databases servers to spread out the loads more evenly, as compared to monolithic database like MySQL. The downside of MongoDB is that the default setting does not have security setting set up and outsiders can retrieve and write data. The security setting requires expertise to set it up. Smaller companies can rely on professional paid support or outsource to guide through the setup decision overtime which MongoDB offers in the marketplace. Compared to other NoSQL databases, mongoDB has better external supports.
 
-![Schema Image](https://user-images.githubusercontent.com/32609294/74513205-eae74800-4ebe-11ea-911b-277bc569883b.PNG)
+![Schema Image](https://user-images.githubusercontent.com/32609294/75133961-92b7ff00-5691-11ea-867d-a6cb5ee2d6fe.PNG)
 
 # CRUD API
 -   Create: add new data to databases

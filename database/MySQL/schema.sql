@@ -32,11 +32,26 @@ CREATE TABLE review (
     cleanliness_rating INT NOT NULL,
     checkin_rating INT NOT NULL,
     value_rating INT NOT NULL,
+    PRIMARY KEY (review_id)
+);
+
+/*
+CREATE TABLE review (
+    review_id INT NOT NULL AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    property_id INT NOT NULL,
+    review_content VARCHAR(500),
+    created_at VARCHAR(50) NOT NULL,
+    communication_rating INT NOT NULL,
+    accuracy_rating INT NOT NULL,
+    cleanliness_rating INT NOT NULL,
+    checkin_rating INT NOT NULL,
+    value_rating INT NOT NULL,
     PRIMARY KEY (review_id),
     FOREIGN KEY (property_id) REFERENCES property (property_id),
     FOREIGN KEY (user_id) REFERENCES user (user_id)
 );
-
+*/
 
 
 
