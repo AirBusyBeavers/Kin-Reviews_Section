@@ -1,3 +1,5 @@
+require('newrelic');
+
 /* eslint-disable no-console */
 const express = require('express');
 const path = require('path');
@@ -6,7 +8,7 @@ const bodyParser = require('body-parser');
 const { getData, getAPropertyData, updateReviewData, addReviewData, deleteReviewData } = require('../database/index.js');
 
 const app = express();
-const port = 3004;
+const port = 3003;
 
 
 app.use(bodyParser.json());
@@ -72,5 +74,5 @@ app.delete('/reviews/:review_id', (req, res) => {
 });
 
 
-// start server on port 3004
+// start server on port 3003
 app.listen(port, () => console.log(`app listening on port ${port}!`));
