@@ -1,5 +1,5 @@
 import http from 'k6/http';
-import { sleep } from 'k6';
+import { sleep, check } from 'k6';
 export let options = {
     vus: 600,
     duration: '3m',
@@ -19,6 +19,9 @@ export default function() {
     value_rating: Math.floor(Math.random() * Math.floor(5)),
 });
 
-    http.post(url, payload);
+    let res = http.post(url, payload);
+    check(res, {
+        "is status 200": r => r.status === 200
+      });
     sleep(1);
 };
