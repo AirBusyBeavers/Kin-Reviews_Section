@@ -1,5 +1,5 @@
 const mysqlConfig = {
-  host: 'localhost',
+  host: '54.183.135.59',
   user: 'root',
   password: '',
   database: 'AirBusyBeavers_reviews'
