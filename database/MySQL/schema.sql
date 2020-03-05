@@ -53,8 +53,10 @@ CREATE TABLE review (
 );
 */
 
-
-
+/*
+ALTER TABLE review ADD FOREIGN KEY (property_id) REFERENCES property(property_id);
+ALTER TABLE review ADD FOREIGN KEY (user_id) REFERENCES user(user_id);
+*/
 
 /* run mysql -u root -p < database/schema.sql to 
 create database and table 
